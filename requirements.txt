@@ -1,0 +1,4 @@
+
+molecule==3.4.0
+molecule-vagrant==0.6.3
+ansible==4.4.0

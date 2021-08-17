@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include stack_desafio_4Linux"
+    - name: "monitorning-stack-ansible"
       include_role:
-        name: "stack_desafio_4Linux"
+        name: "monitorning-stack-ansible"

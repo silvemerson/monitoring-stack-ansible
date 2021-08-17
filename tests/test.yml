@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - stack_desafio_4Linux
+    - monitorning-stack-ansible
