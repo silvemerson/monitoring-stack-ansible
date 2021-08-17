@@ -15,7 +15,8 @@ molecule >= 2.0
 molecule-vagrant >= 0.5.2
 
 Para a instalação dos pacotes acima execute:
-# pip install -r requirements.txt
+
+  $ pip install -r requirements.txt
 
 
 Teste da playbook com o Molecula
@@ -24,24 +25,13 @@ Teste da playbook com o Molecula
 No arquivo molecule.yml, tem as configurações da VM do VirtualBox que o Molecula ira provisionar para o teste:
 
 
-Exemplo:
-
-driver:
-  name: vagrant
-
-platforms:
-  - name: homologacao
-    box: bento/debian-10
-    memory: 1024
-    cpus: 1
-
 Para iniciar os testes, dentro do diretório execute para criar o ambiente de teste:
 
-# molecula converge
+  $ molecula converge
 
 Para destruir o ambiente de testes, execute:
 
-# molecule destroy
+  $ molecule destroy
 
 Executando playbook
 ------------
