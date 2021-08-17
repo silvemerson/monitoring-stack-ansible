@@ -54,5 +54,8 @@ Para destruir o ambiente de testes, execute:
 Executando playbook
 ------------
 
-Depois dos testes terem sido executados com sucesso, configure o seu arquivo de hosts, e execute a usa playbook!!!
+Depois dos testes terem sido executados com sucesso, configure o seu arquivo de hosts, e execute a sua playbook!!!
 
+```bash
+ $ ansible-playbook monitorning-stack-ansible monitorning.yml
+```

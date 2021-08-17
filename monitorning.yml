@@ -1,0 +1,4 @@
+---
+  - hosts: monitorning
+    roles:
+    - monitorning-stack-ansible
