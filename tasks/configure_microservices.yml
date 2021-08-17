@@ -1,0 +1,12 @@
+- name: Copiando arquivo de docker-compose
+  ansible.builtin.copy:
+    src: ./files/docker-compose.yml
+    dest: /tmp/
+  become: true
+
+
+- name: Deploy docker-compose stack
+  become: True
+  shell:
+    cmd: "docker-compose -f docker-compose.yml up -d"
+    chdir: /tmp/

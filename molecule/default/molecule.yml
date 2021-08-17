@@ -1,0 +1,11 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+
+platforms:
+  - name: homologacao
+    box: bento/debian-10
+    memory: 1024
+    cpus: 1

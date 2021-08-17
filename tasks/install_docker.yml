@@ -1,0 +1,28 @@
+- name: Copiando script de instalação Docker
+  ansible.builtin.copy:
+    src: ./files/get-docker.sh
+    dest: /tmp/
+    mode: '0777'
+  become: true
+
+- name: Executando script de instalação Docker
+  command: bash /tmp/get-docker.sh
+  become: true
+
+- name: Copiando daemon.json para /etc/docker
+  ansible.builtin.copy:
+    src: ./files/daemon.json
+    dest: /etc/docker
+  become: true
+
+- name: Instalando docker-compose
+  apt:
+    name: docker-compose
+  become: true
+
+- name: Start serviço Docker
+  ansible.builtin.service:
+    name: docker
+    state: reloaded
+    daemon_reload: yes
+  become: true

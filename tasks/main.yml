@@ -1,0 +1,5 @@
+---
+- include: configure_prometheus.yml
+- include: configure_exporter.yml
+- include: install_docker.yml
+- include: configure_microservices.yml

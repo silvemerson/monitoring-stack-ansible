@@ -1,0 +1,113 @@
+---
+- name: Atualização apt-get repo e cache
+  become: true
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Atualização all apt packages
+  become: true
+  apt: upgrade=dist force_apt_get=yes
+
+- name: Criando usuário Prometheus
+  user:
+      name: prometheus
+      shell: /sbin/nologin
+      append: yes
+      state: present
+  become: true
+
+- name: Criando usuário Node Exporter
+  user:
+      name: node_exporter
+      shell: /sbin/nologin
+      append: yes
+      state: present
+  become: true
+
+- name: Criando /etc/prometheus
+  ansible.builtin.file:
+    path: /etc/prometheus
+    state: directory
+    owner: prometheus
+    group: prometheus
+  become: true
+
+- name: Criando /var/lib/prometheus
+  ansible.builtin.file:
+    path: /var/lib/prometheus
+    state: directory
+    owner: prometheus
+    group: prometheus
+  become: true
+
+
+- name: Descompactando prometheus-2.29.1.linux-amd64.tar.gz para /tmp/
+  ansible.builtin.unarchive:
+    src: ./files/prometheus-2.29.1.linux-amd64.tar.gz
+    dest: /tmp/
+  become: true
+
+
+- name: Copiando prometheus para /usr/local/bin/
+  ansible.builtin.copy:
+    src: /tmp/prometheus-2.29.1.linux-amd64/prometheus
+    dest: /usr/local/bin/prometheus
+    owner: prometheus
+    group: prometheus
+    mode: '0777'
+    remote_src: yes
+  become: true
+
+- name: Copiando promtool para /usr/local/bin/
+  ansible.builtin.copy:
+    src: /tmp/prometheus-2.29.1.linux-amd64/promtool
+    dest: /usr/local/bin/promtool
+    owner: prometheus
+    group: prometheus
+    mode: '0777'
+    remote_src: yes
+  become: true
+
+- name: Copiando consoles para /etc/prometheus
+  ansible.builtin.copy:
+    src: /tmp/prometheus-2.29.1.linux-amd64/consoles
+    dest: /etc/prometheus/consoles
+    owner: prometheus
+    group: prometheus
+    remote_src: yes
+  become: true
+
+- name: Copiando console_libraries para /etc/prometheus
+  ansible.builtin.copy:
+    src: /tmp/prometheus-2.29.1.linux-amd64/console_libraries
+    dest: /etc/prometheus/console_libraries
+    owner: prometheus
+    group: prometheus
+    remote_src: yes
+  become: true
+
+- name: Copiando prometheus.yml para /etc/prometheus
+  ansible.builtin.copy:
+    src: /home/emerson/4linux_desafio/ansible/stack_desafio_4Linux/files/prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+
+  become: true
+
+- name: Copiando alert.rules para /etc/prometheus
+  ansible.builtin.copy:
+    src: ./files/alert.rules
+    dest: /etc/prometheus/alert.rules
+  become: true
+
+- name: Copiando prometheus.service para /etc/systemd/system/
+  ansible.builtin.copy:
+    src: ./files/prometheus.service
+    dest: /etc/systemd/system/prometheus.service
+  become: true
+
+
+- name: Start service Prometheus
+  ansible.builtin.service:
+    name: prometheus
+    state: started
+    daemon_reload: yes
+  become: true
