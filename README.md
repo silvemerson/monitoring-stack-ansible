@@ -16,14 +16,28 @@ molecule-vagrant >= 0.5.2
 
 Para a instalação dos pacotes acima execute:
 
-  $ pip install -r requirements.txt
 
+```bash
+$ pip install -r requirements.txt
+```
 
 Teste da playbook com o Molecula
 --------------
 
-No arquivo molecule.yml, tem as configurações da VM do VirtualBox que o Molecula ira provisionar para o teste:
+No arquivo molecule.yml, tem as configurações da VM do VirtualBox que o Molecula ira provisionar para o teste.
 
+Exemplo:
+
+```yml
+driver:
+  name: vagrant
+
+platforms:
+  - name: homologacao
+    box: bento/debian-10
+    memory: 1024
+    cpus: 1
+```
 
 Para iniciar os testes, dentro do diretório execute para criar o ambiente de teste:
 
