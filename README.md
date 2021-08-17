@@ -27,12 +27,15 @@ No arquivo molecule.yml, tem as configurações da VM do VirtualBox que o Molecu
 
 Para iniciar os testes, dentro do diretório execute para criar o ambiente de teste:
 
+```bash
  $ molecula converge
-
+```
 
 Para destruir o ambiente de testes, execute:
 
+```bash
  $ molecula destroy
+```
 
 Executando playbook
 ------------
