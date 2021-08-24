@@ -10,6 +10,7 @@ services:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
+    restart: always
     container_name: cadvisor
     ports:
     - 8080:8080
@@ -22,6 +23,7 @@ services:
     - redis
   redis:
     image: redis:latest
+    restart: always
     container_name: redis
     ports:
     - 6379:6379

@@ -43,7 +43,7 @@
     remote_src: yes
   become: true
 
-- name: Copiando prometheus.service para /etc/systemd/system/
+- name: Copiando alertmanager.service para /etc/systemd/system/
   ansible.builtin.copy:
     src: ./files/alertmanager.service
     dest: /etc/systemd/system/alertmanager.service

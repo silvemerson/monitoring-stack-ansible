@@ -63,7 +63,7 @@
 
 - name: Copiando prometheus.yml para /etc/prometheus
   ansible.builtin.copy:
-    src: /home/emerson/4linux_desafio/ansible/stack_desafio_4Linux/files/prometheus.yml
+    src: ./files/prometheus.yml
     dest: /etc/prometheus/prometheus.yml
 
   become: true

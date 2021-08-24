@@ -23,6 +23,6 @@
 - name: Start serviço Docker
   ansible.builtin.service:
     name: docker
-    state: reloaded
+    state: restarted
     daemon_reload: yes
   become: true
