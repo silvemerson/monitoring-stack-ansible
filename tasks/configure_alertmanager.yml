@@ -1,0 +1,58 @@
+---
+- name: Criando /etc/alertmanager
+  ansible.builtin.file:
+    path: /etc/alertmanager
+    state: directory
+    owner: alertmanager
+    group: alertmanager
+  become: true
+
+- name: Descompactando alertmanager-0.22.2.linux-amd64.tar.gz para /tmp/
+  ansible.builtin.unarchive:
+    src: ./files/alertmanager-0.22.2.linux-amd64.tar.gz
+    dest: /tmp/
+  become: true
+
+- name: Copiando alertmanager para /usr/local/bin/
+  ansible.builtin.copy:
+    src: /tmp/alertmanager-0.22.2.linux-amd64/alertmanager
+    dest: /usr/local/bin/alertmanager
+    owner: alertmanager
+    group: alertmanager
+    mode: '0777'
+    remote_src: yes
+  become: true
+
+- name: Copiando amtool para /usr/local/bin/
+  ansible.builtin.copy:
+    src: /tmp/alertmanager-0.22.2.linux-amd64/amtool
+    dest: /usr/local/bin/amtool
+    owner: alertmanager
+    group: alertmanager
+    mode: '0777'
+    remote_src: yes
+  become: true
+
+- name: Copiando alertmanager.yml para /etc/alertmanager
+  ansible.builtin.copy:
+    src: /tmp/alertmanager-0.22.2.linux-amd64/alertmanager.yml
+    dest: /etc/alertmanager/alertmanager.yml
+    owner: alertmanager
+    group: alertmanager
+    mode: '0777'
+    remote_src: yes
+  become: true
+
+- name: Copiando prometheus.service para /etc/systemd/system/
+  ansible.builtin.copy:
+    src: ./files/alertmanager.service
+    dest: /etc/systemd/system/alertmanager.service
+  become: true
+
+
+- name: Start service alertmanager
+  ansible.builtin.service:
+    name: alertmanager
+    state: started
+    daemon_reload: yes
+  become: true

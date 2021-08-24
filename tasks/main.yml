@@ -1,5 +1,10 @@
 ---
+- include: update_upgrade.yml
+- include: create_user.yml
 - include: configure_prometheus.yml
-- include: configure_exporter.yml
+- include: configure_node_exporter.yml
+- include: configure_alertmanager.yml
+- include: prometheus_reload.yml
 - include: install_docker.yml
 - include: configure_microservices.yml
+- include: check_services.yml

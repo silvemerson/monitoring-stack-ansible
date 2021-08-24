@@ -9,3 +9,4 @@ platforms:
     box: bento/debian-10
     memory: 1024
     cpus: 1
+

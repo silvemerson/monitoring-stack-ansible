@@ -12,7 +12,7 @@
 - name: Copiando daemon.json para /etc/docker
   ansible.builtin.copy:
     src: ./files/daemon.json
-    dest: /etc/docker
+    dest: /etc/docker/daemon.json
   become: true
 
 - name: Instalando docker-compose

@@ -1,28 +1,4 @@
 ---
-- name: Atualização apt-get repo e cache
-  become: true
-  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
-
-- name: Atualização all apt packages
-  become: true
-  apt: upgrade=dist force_apt_get=yes
-
-- name: Criando usuário Prometheus
-  user:
-      name: prometheus
-      shell: /sbin/nologin
-      append: yes
-      state: present
-  become: true
-
-- name: Criando usuário Node Exporter
-  user:
-      name: node_exporter
-      shell: /sbin/nologin
-      append: yes
-      state: present
-  become: true
-
 - name: Criando /etc/prometheus
   ansible.builtin.file:
     path: /etc/prometheus

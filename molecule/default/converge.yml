@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "monitorning-stack-ansible"
+    - name: "monitoring-stack-ansible"
       include_role:
-        name: "monitorning-stack-ansible"
+        name: "monitoring-stack-ansible"

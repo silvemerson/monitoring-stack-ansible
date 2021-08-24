@@ -1,0 +1,29 @@
+---
+- name: Descompactando node_exporter-1.2.2.linux-amd64.tar.gz para /tmp/
+  ansible.builtin.unarchive:
+    src: ./files/node_exporter-1.2.2.linux-amd64.tar.gz
+    dest: /tmp/
+  become: true
+
+- name: Copiando node_exporter para /usr/local/bin/
+  ansible.builtin.copy:
+    src: /tmp/node_exporter-1.2.2.linux-amd64/node_exporter
+    dest: /usr/local/bin/node_exporter
+    owner: node_exporter
+    group: node_exporter
+    mode: '0777'
+    remote_src: yes
+  become: true
+
+- name: Copiando node_exporter.service para /etc/systemd/system/
+  ansible.builtin.copy:
+    src: ./files/node_exporter.service
+    dest: /etc/systemd/system/node_exporter.service
+  become: true
+
+- name: Start service node_exporter
+  ansible.builtin.service:
+    name: node_exporter
+    state: started
+    daemon_reload: yes
+  become: true

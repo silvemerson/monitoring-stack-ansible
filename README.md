@@ -49,7 +49,23 @@ Para destruir o ambiente de testes, execute:
 
 ```bash
  $ molecula destroy
+
 ```
+
+Inventário
+-------------
+
+arquivo hosts_prom:
+
+```bash
+[monitorning]
+SEU_IP
+
+[monitorning:vars]
+ansible_ssh_user=SEU_USER
+ansible_ssh_private_key_file=/to/path/key.pem
+```
+
 
 Executando playbook
 ------------

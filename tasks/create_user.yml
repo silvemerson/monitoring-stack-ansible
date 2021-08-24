@@ -1,0 +1,24 @@
+---
+- name: Criando usuário Prometheus
+  user:
+      name: prometheus
+      shell: /sbin/nologin
+      append: yes
+      state: present
+  become: true
+
+- name: Criando usuário Node Exporter
+  user:
+      name: node_exporter
+      shell: /sbin/nologin
+      append: yes
+      state: present
+  become: true
+
+- name: Criando usuário Alertmanager
+  user:
+      name: alertmanager
+      shell: /sbin/nologin
+      append: yes
+      state: present
+  become: true
